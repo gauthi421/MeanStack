@@ -15,5 +15,6 @@
     "babel-preset-react": "^6.24.1",
     "express": "^4.16.2",
     "path": "^0.12.7"
-  }
+  },
+"repository": "https://github.com/gauthi421/googlereact-proj"
 }
