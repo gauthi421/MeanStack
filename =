@@ -1,0 +1,116 @@
+'use strict';
+
+console.log('App.js is running!');
+
+var appRoot = document.getElementById('app');
+
+var app = {
+	title: 'React project',
+	subtitle: 'React proj sub title',
+	options: []
+};
+
+var formSubmit = function formSubmit(e) {
+	e.preventDefault();
+	var newOption = e.target.elements.option.value;
+	if (option) {
+		app.options.push(newOption);
+		e.target.elements.option.value = '';
+	}
+};
+
+// JSX - JavaScript XML
+var appRender = function appRender() {
+	var template = React.createElement(
+		'div',
+		null,
+		React.createElement(
+			'h1',
+			null,
+			app.title
+		),
+		app.subtitle && React.createElement(
+			'p',
+			null,
+			' ',
+			app.subtitle
+		),
+		app.options > 0 ? React.createElement(
+			'div',
+			null,
+			React.createElement(
+				'p',
+				null,
+				' Here are the options '
+			),
+			' ',
+			React.createElement('br', null),
+			' ',
+			React.createElement(
+				'p',
+				null,
+				' Total no of Options : ',
+				app.options.length,
+				' '
+			)
+		) : React.createElement(
+			'p',
+			null,
+			' No options '
+		),
+		React.createElement(
+			'ol',
+			null,
+			React.createElement(
+				'li',
+				null,
+				'Item One '
+			),
+			React.createElement(
+				'li',
+				null,
+				'Item Two '
+			)
+		),
+		React.createElement(
+			'form',
+			{ onSubmit: formSubmit() },
+			React.createElement('input', { type: 'text', name: 'option' }),
+			React.createElement(
+				'button',
+				{ onClick: '' },
+				' Add option '
+			)
+		)
+	);
+	ReactDOM.render(template, appRoot);
+};
+
+appRender();
+'use strict';
+
+console.log('App.js is running!');
+
+// JSX - JavaScript XML
+
+var template = React.createElement('div', null, React.createElement('h1', null, 'New Cart'), React.createElement('p', null, ' Below are the items '), React.createElement('ol', null, React.createElement('li', null, 'Item One '), React.createElement('li', null, 'Item Two ')));
+
+var no = 0;
+var appRoot = document.getElementById('app');
+
+var dynamicRenderApp = function dynamicRenderApp() {
+	var template2 = React.createElement('div', null, React.createElement('button', { onClick: function onClick() {
+			no = no + 1;dynamicRenderApp();
+		} }, ' + '), React.createElement('button', { onClick: function onClick() {
+			no = no - 1;dynamicRenderApp();
+		} }, '-'), React.createElement('h1', null, ' count:', no));
+	ReactDOM.render(template2, appRoot);
+};
+
+var app = {
+	title: 'React project',
+	subtitle: 'React proj sub title',
+	options: ['one', 'two']
+};
+
+dynamicRenderApp();

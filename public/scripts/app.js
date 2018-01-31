@@ -2,102 +2,106 @@
 
 console.log('App.js is running!');
 
-// JSX - JavaScript XML
-
-var template = React.createElement(
-	'div',
-	null,
-	React.createElement(
-		'h1',
-		null,
-		'New Cart'
-	),
-	React.createElement(
-		'p',
-		null,
-		' Below are the items '
-	),
-	React.createElement(
-		'ol',
-		null,
-		React.createElement(
-			'li',
-			null,
-			'Item One '
-		),
-		React.createElement(
-			'li',
-			null,
-			'Item Two '
-		)
-	)
-);
-
 var appRoot = document.getElementById('app');
-var userName = 'Gautham Nag';
-var userAge = 29;
-var userLocation = 'Michigan';
-
-var user = {
-	userName: 'Gautham Nag',
-	userAge: 29,
-	userLocation: 'Michigan'
-};
 
 var app = {
 	title: 'React project',
 	subtitle: 'React proj sub title',
-	options: ['one', 'two']
+	options: []
 };
 
-var template2 = React.createElement(
-	'div',
-	null,
-	React.createElement(
-		'p',
-		null,
-		' ',
-		app.title,
-		' '
-	),
-	app.subtitle && React.createElement(
-		'p',
-		null,
-		' ',
-		app.subtitle
-	),
-	app.options && app.options.length > 0 ? React.createElement(
-		'p',
-		null,
-		' ',
-		'Here are Options',
-		' '
-	) : React.createElement(
-		'p',
-		null,
-		' ',
-		'No options',
-		' '
-	),
-	React.createElement(
-		'h1',
-		null,
-		'This is' + (user.userName ? user.userName : 'Anonymous'),
-		' '
-	),
-	user.userAge && user.userAge >= 18 && React.createElement(
-		'p',
-		null,
-		' Age: ',
-		user.userAge,
-		' '
-	),
-	React.createElement(
-		'p',
-		null,
-		user.userLocation
-	)
-);
+var onRemoveAll = function onRemoveAll() {
+	alert('i');
+	app.options = [];
 
-//ReactDOM.render(template, appRoot);
-ReactDOM.render(template2, appRoot);
+	appRender();
+};
+
+var formSubmit = function formSubmit(e) {
+	e.preventDefault();
+	var newOption = e.target.elements.option.value;
+	if (newOption) {
+		app.options.push(newOption);
+		e.target.elements.option.value = '';
+	}
+	appRender();
+};
+
+// JSX - JavaScript XML
+var appRender = function appRender() {
+	var template = React.createElement(
+		'div',
+		null,
+		React.createElement(
+			'h1',
+			null,
+			app.title
+		),
+		app.subtitle && React.createElement(
+			'p',
+			null,
+			' ',
+			app.subtitle
+		),
+		React.createElement(
+			'div',
+			null,
+			' ',
+			app.options.length > 0 ? React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'p',
+					null,
+					' Here are the options '
+				),
+				' ',
+				React.createElement('br', null),
+				' ',
+				React.createElement(
+					'p',
+					null,
+					' Total no of Options- ',
+					app.options.length,
+					' '
+				)
+			) : React.createElement(
+				'p',
+				null,
+				' No options '
+			)
+		),
+		React.createElement(
+			'ol',
+			null,
+			React.createElement(
+				'li',
+				null,
+				'Item One '
+			),
+			React.createElement(
+				'li',
+				null,
+				'Item Two '
+			)
+		),
+		React.createElement(
+			'form',
+			{ name: 'mainForm', onSubmit: formSubmit },
+			React.createElement('input', { type: 'text', name: 'option' }),
+			React.createElement(
+				'button',
+				{ onClick: '' },
+				' Add option '
+			),
+			React.createElement(
+				'button',
+				{ onClick: onRemoveAll },
+				' Remove All options '
+			)
+		)
+	);
+	ReactDOM.render(template, appRoot);
+};
+
+appRender();

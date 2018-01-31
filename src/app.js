@@ -1,51 +1,52 @@
 console.log('App.js is running!');
 
+const appRoot = document.getElementById('app');
+
+const app={
+title: 'React project',
+subtitle:'React proj sub title',
+options: []
+};
+
+const onRemoveAll = () => {
+alert('i');
+app.options = [];
+
+appRender();
+};
+
+const formSubmit = (e) =>{
+e.preventDefault(); 
+const newOption = e.target.elements.option.value; 
+if(newOption){
+app.options.push(newOption); 
+e.target.elements.option.value='';
+}
+appRender();
+};
+
 // JSX - JavaScript XML
-
-var template =(
+const appRender = () => {
+const template =(
  <div>
-	<h1>New Cart</h1>
-
-	<p> Below are the items </p>
+	<h1>{app.title}</h1>
+ {(app.subtitle) && <p> {app.subtitle}</p>}
+<div>	{app.options.length>0?<div><p> Here are the options </p> <br/> <p> Total no of Options- {app.options.length} </p></div>:<p> No options </p>}</div>
 	<ol> 
 		<li>Item One </li>
 		<li>Item Two </li>
-	</ol>
+	</ol> 
+<form name='mainForm' onSubmit={formSubmit}>
+
+<input type='text' name='option'/>
+<button onClick=''> Add option </button>
+<button onClick={onRemoveAll}> Remove All options </button>
+
+
+</form>
 </div>
 );
-
-
-
-let appRoot = document.getElementById('app');
-let userName = 'Gautham Nag';
-let userAge = 29;
-let userLocation = 'Michigan';
-
-let user= {
-userName: 'Gautham Nag',
-userAge: 29,
-userLocation: 'Michigan'
+ReactDOM.render(template, appRoot);
 };
 
-
-let app={
-title: 'React project',
-subtitle:'React proj sub title',
-options: ['one', 'two']
-};
-
-let template2 = (
-<div>
-<p> {app.title} </p>
-{app.subtitle && <p> {app.subtitle}</p>}
- {(app.options && app.options.length>0)? <p> {'Here are Options'} </p>: <p> {'No options'} </p>}
-<h1>{ 'This is' + (user.userName? user.userName: 'Anonymous') } </h1>
- 
-{(user.userAge && user.userAge>=18)&&<p> Age: {user.userAge} </p>} 
-<p>{user.userLocation}</p>
-
-</div>
-);
-
-//ReactDOM.render(template, appRoot);
-ReactDOM.render(template2,appRoot);
+appRender();
