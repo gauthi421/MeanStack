@@ -2,17 +2,21 @@ console.log('App.js is running!');
 
 const appRoot = document.getElementById('app');
 
+/*App object */
 const app={
 title: 'React project',
 subtitle:'React proj sub title',
 options: []
 };
 
+/* Remove Options Object */
 const onRemoveAll = () => {
 app.options = [];
-
 appRender();
 };
+
+
+/*Form Submission - To Add new Option Functionality */
 
 const formSubmit = (e) =>{
 e.preventDefault(); 
@@ -24,13 +28,27 @@ e.target.elements.option.value='';
 appRender();
 };
 
+/*Pick an option */
+
+const pickOp= () => {
+
+const randomNum= Math.floor(Math.random()*app.options.length);
+const pick = app.options[randomNum];
+alert(pick);
+};
+
+/* JSX Template Functionality*/
+
 // JSX - JavaScript XML
 const appRender = () => {
 const template =(
  <div>
 	<h1>{app.title}</h1>
  {(app.subtitle) && <p> {app.subtitle}</p>}
-<div>	{app.options.length>0?<div><p> Here are the options </p> <br/> <p> Total no of Options- {app.options.length} </p></div>:<p> No options </p>}</div>
+<div>	{app.options.length>0?<div><p> Here are the options </p><br/></div>:<p> No options </p>}</div>
+
+<button disabled={app.options.length==0} onClick={pickOp} > What should I do ? </button>
+
 	<ol> 
 	{
 app.options.map((opt) => {
@@ -51,4 +69,5 @@ return <li key={opt}> {opt} </li>;
 ReactDOM.render(template, appRoot);
 };
 
+//Initialise My Page.
 appRender();

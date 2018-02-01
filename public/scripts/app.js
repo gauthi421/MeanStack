@@ -4,17 +4,20 @@ console.log('App.js is running!');
 
 var appRoot = document.getElementById('app');
 
+/*App object */
 var app = {
 	title: 'React project',
 	subtitle: 'React proj sub title',
 	options: []
 };
 
+/* Remove Options Object */
 var onRemoveAll = function onRemoveAll() {
 	app.options = [];
-
 	appRender();
 };
+
+/*Form Submission - To Add new Option Functionality */
 
 var formSubmit = function formSubmit(e) {
 	e.preventDefault();
@@ -25,6 +28,17 @@ var formSubmit = function formSubmit(e) {
 	}
 	appRender();
 };
+
+/*Pick an option */
+
+var pickOp = function pickOp() {
+
+	var randomNum = Math.floor(Math.random() * app.options.length);
+	var pick = app.options[randomNum];
+	alert(pick);
+};
+
+/* JSX Template Functionality*/
 
 // JSX - JavaScript XML
 var appRender = function appRender() {
@@ -54,21 +68,17 @@ var appRender = function appRender() {
 					null,
 					' Here are the options '
 				),
-				' ',
-				React.createElement('br', null),
-				' ',
-				React.createElement(
-					'p',
-					null,
-					' Total no of Options- ',
-					app.options.length,
-					' '
-				)
+				React.createElement('br', null)
 			) : React.createElement(
 				'p',
 				null,
 				' No options '
 			)
+		),
+		React.createElement(
+			'button',
+			{ disabled: app.options.length == 0, onClick: pickOp },
+			' What should I do ? '
 		),
 		React.createElement(
 			'ol',
@@ -89,7 +99,7 @@ var appRender = function appRender() {
 			React.createElement('input', { type: 'text', name: 'option' }),
 			React.createElement(
 				'button',
-				{ onClick: '' },
+				{ onClick: 'mainForm.submit()' },
 				' Add option '
 			),
 			React.createElement(
@@ -102,4 +112,5 @@ var appRender = function appRender() {
 	ReactDOM.render(template, appRoot);
 };
 
+//Initialise My Page.
 appRender();
