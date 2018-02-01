@@ -9,7 +9,6 @@ options: []
 };
 
 const onRemoveAll = () => {
-alert('i');
 app.options = [];
 
 appRender();
@@ -33,9 +32,12 @@ const template =(
  {(app.subtitle) && <p> {app.subtitle}</p>}
 <div>	{app.options.length>0?<div><p> Here are the options </p> <br/> <p> Total no of Options- {app.options.length} </p></div>:<p> No options </p>}</div>
 	<ol> 
-		<li>Item One </li>
-		<li>Item Two </li>
-	</ol> 
+	{
+app.options.map((opt) => {
+return <li key={opt}> {opt} </li>;
+})
+	}
+ 	</ol> 
 <form name='mainForm' onSubmit={formSubmit}>
 
 <input type='text' name='option'/>

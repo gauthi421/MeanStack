@@ -11,7 +11,6 @@ var app = {
 };
 
 var onRemoveAll = function onRemoveAll() {
-	alert('i');
 	app.options = [];
 
 	appRender();
@@ -74,16 +73,15 @@ var appRender = function appRender() {
 		React.createElement(
 			'ol',
 			null,
-			React.createElement(
-				'li',
-				null,
-				'Item One '
-			),
-			React.createElement(
-				'li',
-				null,
-				'Item Two '
-			)
+			app.options.map(function (opt) {
+				return React.createElement(
+					'li',
+					{ key: opt },
+					' ',
+					opt,
+					' '
+				);
+			})
 		),
 		React.createElement(
 			'form',
