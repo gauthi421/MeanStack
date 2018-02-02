@@ -1,116 +1,122 @@
 'use strict';
 
-console.log('App.js is running!');
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var appRoot = document.getElementById('app');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-/*App object */
-var app = {
-	title: 'React project',
-	subtitle: 'React proj sub title',
-	options: []
-};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-/* Remove Options Object */
-var onRemoveAll = function onRemoveAll() {
-	app.options = [];
-	appRender();
-};
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/*Form Submission - To Add new Option Functionality */
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var formSubmit = function formSubmit(e) {
-	e.preventDefault();
-	var newOption = e.target.elements.option.value;
-	if (newOption) {
-		app.options.push(newOption);
-		e.target.elements.option.value = '';
+//Person Class
+var Person = function () {
+
+	// Person Constructor
+	function Person() {
+		var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+		var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+		_classCallCheck(this, Person);
+
+		this.name = name;
+		this.age = age;
 	}
-	appRender();
-};
 
-/*Pick an option */
+	//super greeting method
 
-var pickOp = function pickOp() {
 
-	var randomNum = Math.floor(Math.random() * app.options.length);
-	var pick = app.options[randomNum];
-	alert(pick);
-};
+	_createClass(Person, [{
+		key: 'getGreeting',
+		value: function getGreeting() {
+			console.log('Hey This is ' + this.name);
+		}
 
-/* JSX Template Functionality*/
+		//super description method
 
-// JSX - JavaScript XML
-var appRender = function appRender() {
-	var template = React.createElement(
-		'div',
-		null,
-		React.createElement(
-			'h1',
-			null,
-			app.title
-		),
-		app.subtitle && React.createElement(
-			'p',
-			null,
-			' ',
-			app.subtitle
-		),
-		React.createElement(
-			'div',
-			null,
-			' ',
-			app.options.length > 0 ? React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'p',
-					null,
-					' Here are the options '
-				),
-				React.createElement('br', null)
-			) : React.createElement(
-				'p',
-				null,
-				' No options '
-			)
-		),
-		React.createElement(
-			'button',
-			{ disabled: app.options.length == 0, onClick: pickOp },
-			' What should I do ? '
-		),
-		React.createElement(
-			'ol',
-			null,
-			app.options.map(function (opt) {
-				return React.createElement(
-					'li',
-					{ key: opt },
-					' ',
-					opt,
-					' '
-				);
-			})
-		),
-		React.createElement(
-			'form',
-			{ name: 'mainForm', onSubmit: formSubmit },
-			React.createElement('input', { type: 'text', name: 'option' }),
-			React.createElement(
-				'button',
-				{ onClick: 'mainForm.submit()' },
-				' Add option '
-			),
-			React.createElement(
-				'button',
-				{ onClick: onRemoveAll },
-				' Remove All options '
-			)
-		)
-	);
-	ReactDOM.render(template, appRoot);
-};
+	}, {
+		key: 'getDescription',
+		value: function getDescription() {
+			console.log(this.name + ' is of Age - ' + this.age);
+		}
+	}]);
 
-//Initialise My Page.
-appRender();
+	return Person;
+}();
+
+// Student Class
+
+
+var Student = function (_Person) {
+	_inherits(Student, _Person);
+
+	//Child Construtor method
+	function Student(name, age, major) {
+		_classCallCheck(this, Student);
+
+		var _this = _possibleConstructorReturn(this, (Student.__proto__ || Object.getPrototypeOf(Student)).call(this, name, age));
+
+		_this.major = major;
+		return _this;
+	}
+
+	//Check for major
+
+
+	_createClass(Student, [{
+		key: 'hasMajor',
+		value: function hasMajor() {
+			return !!this.major;
+		}
+
+		//overriden description method
+
+	}, {
+		key: 'getDescription',
+		value: function getDescription() {
+			var supGreet = _get(Student.prototype.__proto__ || Object.getPrototypeOf(Student.prototype), 'getDescription', this).call(this);
+			if (this.hasMajor()) {
+				supGreet = supGreet + (' with a major - ' + this.major);
+			}
+			return supGreet;
+		}
+	}]);
+
+	return Student;
+}(Person);
+
+// Traveler Class
+
+
+var Traveler = function (_Person2) {
+	_inherits(Traveler, _Person2);
+
+	function Traveler(name, age, supPlace) {
+		_classCallCheck(this, Traveler);
+
+		var _this2 = _possibleConstructorReturn(this, (Traveler.__proto__ || Object.getPrototypeOf(Traveler)).call(this, name, age));
+
+		_this2.supPlace = supPlace;
+		return _this2;
+	}
+
+	_createClass(Traveler, [{
+		key: 'getGreeting',
+		value: function getGreeting() {
+			_get(Traveler.prototype.__proto__ || Object.getPrototypeOf(Traveler.prototype), 'getGreeting', this).call(this);
+			if (!!this.supPlace) {
+				console.log('I\'m visting from ' + this.supPlace + '.');
+			}
+		}
+	}]);
+
+	return Traveler;
+}(Person);
+
+var me = new Person('Gautham', 10);
+console.log(me.getDescription());
+var stud = new Student('Sunny', 10, 'CSE');
+console.log(stud.getDescription());
+var trvlr = new Traveler('Amul', 26, 'Michigan');
+trvlr.getGreeting();

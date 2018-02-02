@@ -37,6 +37,8 @@ const pick = app.options[randomNum];
 alert(pick);
 };
 
+
+
 /* JSX Template Functionality*/
 
 // JSX - JavaScript XML
