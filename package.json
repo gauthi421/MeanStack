@@ -1,0 +1,20 @@
+{
+  "name": "react-prj",
+  "version": "1.0.0",
+  "description": "Creating this project after first failure of react project.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "deploy": "gcloud app deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gautham Nag Adapala",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.2",
+    "path": "^0.12.7"
+  },
+"repository": "https://github.com/gauthi421/googlereact-proj"
+}
