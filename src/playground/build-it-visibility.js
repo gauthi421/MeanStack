@@ -1,31 +1,35 @@
-'use strict'
+class VisibilityToggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.mainTag = 'visibility Toggle';
+        this.detlsBtnLabl = ['Show details', 'Hide details'];
+        this.visToggle = this.visToggle.bind(this);
+        this.state = {
+            visIp: false
+          
+        }
 
+    }
 
-const pageDetails = {
-mainTag: 'visibility Toggle',
-detlsBtnLabl: ['Show details','Hide details'],
-visIp: false
-};
+    visToggle() {
+        this.setState((prevState) => {
+            return {
+                visIp: !prevState.visIp
+            };
+        });
+    }
 
-const visToggle= () => {
-pageDetails.visIp= !pageDetails.visIp;
-renderApp();
-};
+    render() {
+        return (
+            <div>
+                <h1> {this.mainTag}</h1>
+                {this.state.visIp ? <p>I'm hidden</p> : ''}
+                <br />
+                <button onClick={this.visToggle}>{this.state.visIp ?this.detlsBtnLabl[1] : this.detlsBtnLabl[0]}</button>
+            </div>
+        );
+    }
 
-const appRoot = document.getElementById('app');
-const renderApp= () => {
-const template = (
+}
 
-<div>
-<h1> {pageDetails.mainTag}</h1>
-{pageDetails.visIp?<p>I'm hidden</p>:''}
-<br/>
-<button onClick={visToggle}>{pageDetails.visIp?pageDetails.detlsBtnLabl[1]:pageDetails.detlsBtnLabl[0]}</button>
-</div>
-
-);
-ReactDOM.render(template,appRoot);
-};
-
-
-renderApp();
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
