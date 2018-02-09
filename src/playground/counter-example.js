@@ -25,7 +25,7 @@ class Counter extends React.Component {
     }
 
     handleReset() {
-        this.setState(() => {return {number: 0}; });
+        this.setState(() => { return { number: 0 }; });
 
     }
 
@@ -39,5 +39,5 @@ class Counter extends React.Component {
             </div>);
     }
 }
-
-ReactDOM.render(<Counter ini= {0} />, document.getElementById('app'));
+Counter.defaultProps = {ini:0};
+ReactDOM.render(<Counter ini={10} />, document.getElementById('app'));
