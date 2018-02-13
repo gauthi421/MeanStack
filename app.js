@@ -10,6 +10,7 @@ var cert = fs.readFileSync( 'encryption/primary.crt' );
 var ca = fs.readFileSync( 'encryption/intermediate.crt' );
 */
 
+app.use('/public',express.static(path.join(__dirname, '/public')));
 app.use('/public/scripts',express.static(path.join(__dirname, '/public/scripts')));
 app.get('/', function(req,res){
 res.sendFile(path.join(__dirname +'/public/index.html'));

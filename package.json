@@ -6,15 +6,19 @@
   "scripts": {
     "start": "node app.js",
     "deploy": "gcloud app deploy",
+    "build": "webpack",
+    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gautham Nag Adapala",
-  "license": "ISC",
+  "license": "Gautham",
   "dependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "express": "^4.16.2",
-    "path": "^0.12.7"
+    "live-server": "^1.2.0",
+    "path": "^0.12.7",
+    "webpack": "^3.11.0"
   },
-"repository": "https://github.com/gauthi421/googlereact-proj"
+  "repository": "https://github.com/gauthi421/googlereact-proj"
 }
