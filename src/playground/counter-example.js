@@ -28,7 +28,19 @@ class Counter extends React.Component {
         this.setState(() => { return { number: 0 }; });
 
     }
+    componentDidMount(){
+        const cacheData = localStorage.getItem('currNumber');
+        const num = parseInt(cacheData, 10);
+        if(!isNaN(num))
+        {
+        this.setState(() => ({num}) );
+        }
+    }
+componentDidUpdate(prevProps,prevState){
 
+localStorage.setItem('currNumber',this.state.number);
+    
+}
     render() {
         return (
             <div>
