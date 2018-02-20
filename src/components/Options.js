@@ -11,8 +11,8 @@ const Options = (props) => {
                 }
                 )}
 
-            {props.errormsg && <p> {props.errormsg} </p>}
-            <button onClick={props.handleRemoveAll}>Remove All Options </button>
+            {props.errormsg && <p className="add-option-error" > {props.errormsg} </p>}
+            <button className="button" onClick={props.handleRemoveAll}>Remove All Options </button>
         </div>
     );
 }

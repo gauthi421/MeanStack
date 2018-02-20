@@ -31,11 +31,3 @@ var http = require('http');
 http.createServer(app).listen(80);
 var forceSsl = require('express-force-ssl');
 app.use(forceSsl);
-
-/*
-var server = app.listen(process.env.port || '80', function(){
-console.log('App listening on port %s', server.address().port);
-console.log('App listening on Address %s', server.address().address);
-console.log('Press Ctrl c to quit');
-});
-*/
