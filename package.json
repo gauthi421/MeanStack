@@ -1,38 +1,31 @@
 {
-  "name": "react-prj",
-  "version": "1.0.0",
-  "description": "Creating this project after first failure of react project.",
-  "main": "app.js",
+  "name": "app",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node app.js",
-    "deploy": "gcloud app deploy",
-    "build": "webpack",
-    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "dev-server": "webpack-dev-server"
+    "start": "node ./bin/www",
+    "test": "jasmine"
   },
-  "author": "Gautham Nag Adapala",
-  "license": "Gautham",
+  "nyc": {
+    "check-coverage": false,
+    "per-file": true,
+    "include": [
+      "models/**/*.js"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ]
+  },
   "dependencies": {
-    "babel-core": "6.25.0",
-    "babel-loader": "7.1.1",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "0.28.4",
-    "express": "^4.16.2",
-    "express-force-ssl": "^0.3.2",
-    "live-server": "^1.2.0",
-    "node-sass": "4.5.3",
-    "normalize.css": "7.0.0",
-    "path": "^0.12.7",
-    "react": "16.0.0",
-    "react-dom": "16.0.0",
-    "react-modal": "^3.2.1",
-    "sass-loader": "6.0.6",
-    "style-loader": "0.18.2",
-    "validator": "8.0.0",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "2.5.1"
-  },
-  "repository": "https://github.com/gauthi421/googlereact-proj"
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "hbs": "~4.0.1",
+    "jasmine": "^3.0.0",
+    "mongoose": "^5.0.6",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  }
 }

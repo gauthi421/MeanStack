@@ -1,33 +1,46 @@
-'use strict'
-
 var express = require('express');
-var app = express();
 var path = require('path');
-var fs = require('fs');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-var key = fs.readFileSync(path.join(__dirname, '104.196.202.141.key'));
-var cert = fs.readFileSync( path.join(__dirname, '104.196.202.141.cert'));
+var index = require('./routes/index');
+var users = require('./routes/users');
 
-var options = {
-  key: key,
-  cert: cert,
-};
+var app = express();
 
-app.use('/public',express.static(path.join(__dirname, '/public')));
-app.use('/public/scripts',express.static(path.join(__dirname, '/public/scripts')));
-app.get('/', function(req,res){
-res.sendFile(path.join(__dirname +'/public/index.html'));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', index);
+app.use('/api/v1/users', users);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-var https = require('https');
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-var server = https.createServer(options, app).listen('443', function(){
-console.log('App listening on port %s', server.address().port);
-console.log('App listening on Address %s', server.address().address);
-console.log('Press Ctrl c to quit');
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
-var http = require('http');
-http.createServer(app).listen(80);
-var forceSsl = require('express-force-ssl');
-app.use(forceSsl);
+module.exports = app;
